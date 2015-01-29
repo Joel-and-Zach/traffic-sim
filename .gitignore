@@ -60,4 +60,5 @@ target/
 ### IPythonNotebook ###
 # Temporary data
 .ipynb_checkpoints/
+
 .python-version
