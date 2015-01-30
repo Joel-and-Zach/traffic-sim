@@ -23,13 +23,20 @@ class Car:
         return self.__str__()
 
     def speed_up(self):
-        self.current_speed += self.acceleration
+        self.speed += self.acceleration
 
     def slow_down(self):
-        self.current_speed -= self.acceleration
+        self.speed -= self.acceleration
 
     def move(self):
-        self.back += self.current_speed
+        self.back += self.speed
 
     def set_speed(self, speed):
-        self.current_speed = speed
+        self.speed = speed
+
+    def check_buffer(self, previous_car):
+        if self.back + 24 >= previous_car.back:
+            self.set_speed(previous_car.speed)
+
+    def set_position(self, position):
+        self.position = position
