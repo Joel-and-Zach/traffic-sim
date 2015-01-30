@@ -8,12 +8,13 @@ class Car:
 
     def __init__(self, position):
         self.max_speed = 33.33
-        self.current_speed = 0
+        self.speed = 0
         self.size = 5
         self.acceleration = 2
         self.space = 20
         self.back = position
         self.type = random.choice(styles)
+        self.slow_chance = 0.1
 
     def __str__(self):
         return self.style
@@ -30,5 +31,5 @@ class Car:
     def move(self):
         self.back += self.current_speed
 
-    def match_speed(self, other_car):
-        self.current_speed = other_car.current_speed
+    def set_speed(self, speed):
+        self.current_speed = speed
