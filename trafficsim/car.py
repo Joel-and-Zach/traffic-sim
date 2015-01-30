@@ -13,8 +13,9 @@ class Car:
         self.acceleration = 2
         self.space = 20
         self.back = position
-        self.type = random.choice(styles)
+        self.style = random.choice(styles)
         self.slow_chance = 0.1
+
 
     def __str__(self):
         return self.style
@@ -28,15 +29,20 @@ class Car:
     def slow_down(self):
         self.speed -= self.acceleration
 
-    def move(self):
-        self.back += self.speed
+    def move(self, road_length):
+        self.back = (self.back + self.speed) % road_length
 
     def set_speed(self, speed):
         self.speed = speed
 
     def check_buffer(self, previous_car):
         if self.back + 24 >= previous_car.back:
-            self.set_speed(previous_car.speed)
+            return True
+        else:
+            return False
 
     def set_position(self, position):
-        self.position = position
+        self.back = position
+
+    def set_slow_chance(self, chance):
+        self.slow_chance = chance

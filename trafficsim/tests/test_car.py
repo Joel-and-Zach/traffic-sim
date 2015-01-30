@@ -25,7 +25,7 @@ def test_car_position():
 
 
 def test_car_movement():
-    best_car.move()
+    best_car.move(1000)
     assert best_car.back == 9
 
 #def test_car_match_speed():
