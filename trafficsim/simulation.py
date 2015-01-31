@@ -1,5 +1,6 @@
 from trafficsim.car import Car
 import random
+import numpy as np
 
 
 class Simulation:
@@ -57,7 +58,8 @@ class Simulation:
             distance = (next_car.back - (car.size + 1))
             if distance < 0:
                 car.set_position(self.road + distance)
-            car.set_position(distance)
+            else:
+                car.set_position(distance)
         else:
             car.move(self.road)
 
