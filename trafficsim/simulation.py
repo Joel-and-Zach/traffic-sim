@@ -1,4 +1,6 @@
+from trafficsim.car import Aggressive
 from trafficsim.car import Car
+from trafficsim.car import Commercial
 import random
 import numpy as np
 
@@ -9,8 +11,11 @@ class Simulation:
     Increments time by seconds
     Moves cars, and decides
     """
-    def __init__(self, number_of_cars=30, length=1000):
-        self.traffic = self.create_cars(number_of_cars)
+    def __init__(self, number_of_cars=30, length=1000, nightmare=False):
+        if nightmare is False:
+            self.traffic = self.create_cars(number_of_cars)
+        else:
+            self.traffic = self.create_nightmare(number_of_cars)
         self.road = length
 
     def simulate(self, desired_time=300):
@@ -116,6 +121,19 @@ class Simulation:
     def hit(self, car, next_car):
         return (car.back + car.speed >= next_car.back and
                 next_car.back - car.back > 0)
+
+
+    def create_nightmare(self, number_of_cars):
+        cars = []
+        for number in range(number_of_cars):
+            random_number = random.random()
+            if random_number > 0.90:
+                cars.append(Commercial((33 * len(cars))))
+            elif random_number > 0.75:
+                cars.append(Aggressive((33 * len(cars))))
+            else:
+                cars.append(Car((33 * len(cars))))
+        return cars
 
     def create_cars(self, number_of_cars):
         cars = []

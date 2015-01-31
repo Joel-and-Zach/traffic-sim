@@ -40,7 +40,7 @@ class Car:
         self.speed = speed
 
     def check_buffer(self, previous_car):
-        if self.back + 24 >= previous_car.back:
+        if (self.back + 20 + self.size - 1) >= previous_car.back:
             return True
         else:
             return False
@@ -50,3 +50,25 @@ class Car:
 
     def set_slow_chance(self, chance):
         self.slow_chance = chance
+
+class Aggressive(Car):
+    def __init__(self, position):
+        self.max_speed = 38.89
+        self.acceleration = 5
+        self.space = 15
+        self.slow_chance = 0.05
+        self.back = position
+        self.style = "Sports car"
+        self.speed = 0
+        self.size = 5
+
+class Commercial(Car):
+    def __init__(self, position):
+        self.max_speed = 27.78
+        self.acceleration = 1.5
+        self.space = 100
+        self.slow_chance = 0.1
+        self.size = 25
+        self.back = position
+        self.speed = 0
+        self.style = "Mac Truck"
