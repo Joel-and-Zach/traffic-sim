@@ -17,30 +17,26 @@ class Simulation:
     #def simulation(self):
     #    while length > time:
 
+    def speed_logic(self, car, next_car):
+        if car.back >= self.road - 24:
+            self.end_of_line(car, next_car)
+        if car.check_buffer(first_car):
+            car.set_speed(next_car.speed)
+        else:
+            self.speed_or_slow(car)
 
     def adjust_speeds(self):
         last_car = self.traffic[-1]
         first_car = self.traffic[0]
-        if last_car.back >= self.road - 24:
-            self.end_of_line(last_car, first_car)
-        if last_car.check_buffer(first_car):
-            last_car.set_speed(first_car.speed)
-        else:
-            self.speed_or_slow(last_car)
+        self.speed_logic(last_car, first_car)
         for car in self.traffic[-2::-1]:
             location = self.traffic.index(car)
             next_car = self.traffic[location + 1]
-            if car.back >= self.road - 24:
-                self.end_of_line(car, next_car)
-            if car.check_buffer(next_car):
-                car.set_speed(next_car.speed)
-            else:
-                self.speed_or_slow(car)
+            self.speed_logic(car, next_car)
 
     def end_of_line(self, car, next_car):
         if (car.back + 24) % self.road >= next_car.back:
             car.set_speed(next_car.speed)
-
 
     def speed_or_slow(self, car):
         if random.random() > car.slow_chance:
@@ -63,7 +59,6 @@ class Simulation:
         else:
             car.move(self.road)
 
-
     def move_logic(self, car, next_car):
         if car.back > next_car.back:
             if car.back + car.speed > self.road:
@@ -77,7 +72,6 @@ class Simulation:
             else:
                 car.move(self.road)
 
-
     def move_cars(self):
         last_car = self.traffic[-1]
         first_car = self.traffic[0]
@@ -86,19 +80,10 @@ class Simulation:
             location = self.traffic.index(car)
             next_car = self.traffic[location + 1]
             self.move_logic(car, next_car)
-            # if last_car.back > first_car.back:
-            # if car.back + car.speed > self.road:
-            #     self.over_1000(car, next_car)
-            # elif self.hit(car, next_car):
-            #     distance = next_car.back - (car.size + 1)
-            #     car.set_position(distance)
-            # else:
-            #     car.move(self.road)
-
 
     def hit(self, car, next_car):
-        return (car.back + car.speed >= next_car.back and next_car.back - car.back > 0)
-
+        return (car.back + car.speed >= next_car.back and
+                next_car.back - car.back > 0)
 
     def create_cars(self, number_of_cars):
         cars = []

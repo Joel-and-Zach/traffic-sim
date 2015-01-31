@@ -1,6 +1,10 @@
 import random
 
-styles = ["Scion Xa", "Honda Civic", "Acura TLX", "Toyota Prius", "Honda Accord",
+styles = ["Scion Xa",
+         "Honda Civic", 
+         "Acura TLX",
+         "Toyota Prius",
+         "Honda Accord",
          "Toyota Camry"]
 
 
