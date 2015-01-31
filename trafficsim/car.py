@@ -1,7 +1,7 @@
 import random
 
 styles = ["Scion Xa",
-         "Honda Civic", 
+         "Honda Civic",
          "Acura TLX",
          "Toyota Prius",
          "Honda Accord",
@@ -11,7 +11,7 @@ styles = ["Scion Xa",
 class Car:
 
     def __init__(self, position):
-        self.max_speed = 33.33
+        self.max_speed = 33
         self.speed = 0
         self.size = 5
         self.acceleration = 2

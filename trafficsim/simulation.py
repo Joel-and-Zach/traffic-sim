@@ -9,19 +9,31 @@ class Simulation:
     Increments time by seconds
     Moves cars, and decides
     """
-    def __init__(self, time=500, number_of_cars=30, length=1000):
-        self.time = 0
+    def __init__(self, number_of_cars=30, length=1000):
         self.traffic = self.create_cars(number_of_cars)
         self.road = length
 
-    #def simulation(self):
-    #    while length > time:
+    def simulate(self, desired_time=300):
+        time = 0
+        cars_speeds = []
+        cars_locations = []
+        while desired_time > time:
+            self.adjust_speeds()
+            self.move_cars()
+            # if time > 60:
+            cars_speeds.append([car.speed for car in self.traffic])
+            cars_locations.append([car.back for car in self.traffic])
+            time += 1
+        return cars_speeds, cars_locations
 
     def speed_logic(self, car, next_car):
         if car.back >= self.road - 24:
             self.end_of_line(car, next_car)
-        if car.check_buffer(first_car):
-            car.set_speed(next_car.speed)
+        if car.check_buffer(next_car):
+            if next_car.speed < car.speed:
+                car.set_speed(next_car.speed)
+            else:
+                self.speed_or_slow(car)
         else:
             self.speed_or_slow(car)
 
@@ -56,6 +68,7 @@ class Simulation:
                 car.set_position(self.road + distance)
             else:
                 car.set_position(distance)
+            car.set_speed(0)
         else:
             car.move(self.road)
 
@@ -69,6 +82,7 @@ class Simulation:
             if self.hit(car, next_car):
                 distance = (next_car.back - (car.size + 1))
                 car.set_position(distance)
+                car.set_speed(0)
             else:
                 car.move(self.road)
 
@@ -88,5 +102,5 @@ class Simulation:
     def create_cars(self, number_of_cars):
         cars = []
         for number in range(number_of_cars):
-            cars.append(Car((number_of_cars * number)))
+            cars.append(Car((33 * number)))
         return cars
