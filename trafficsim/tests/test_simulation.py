@@ -32,8 +32,9 @@ def test_edge_case():
     edge_sim.traffic[1].set_speed(30)
     edge_sim.traffic[1].set_position(990)
     edge_sim.traffic[0].set_position(10)
+    # edge_sim.traffic[2].set_position(800)
     edge_sim.adjust_speeds()
-    assert edge_sim.traffic[1].speed == 0
+    assert edge_sim.traffic[1].speed == 2
 
 
 def test_edge_case_two():
