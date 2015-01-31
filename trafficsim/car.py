@@ -50,3 +50,18 @@ class Car:
 
     def set_slow_chance(self, chance):
         self.slow_chance = chance
+
+class Aggressive(Car):
+    def __init__(self):
+        self.max_speed = 38.89
+        self.acceleration = 5
+        self.space = 15
+        self.slow_chance = 0.05
+
+class Commercial(Car):
+    def __init__(self):
+        self.max_speed = 27.78
+        self.acceleration = 1.5
+        self.space = 100
+        self.slow_chance = 0.1
+        self.size = 5
