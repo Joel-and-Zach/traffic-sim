@@ -42,7 +42,7 @@ class Simulation:
         if random.random() > car.slow_chance:
             car.speed_up()
             if car.speed > car.max_speed:
-                car.speed = car.max_speed
+                car.set_speed(car.max_speed)
         else:
             if car.speed - 2 < 0:
                 car.set_speed(0)
