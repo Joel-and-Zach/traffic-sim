@@ -20,9 +20,9 @@ class Simulation:
         while desired_time > time:
             self.adjust_speeds()
             self.move_cars()
-            # if time > 60:
-            cars_speeds.append([car.speed for car in self.traffic])
-            cars_locations.append([car.back for car in self.traffic])
+            if time > 59:
+                cars_speeds.extend([car.speed for car in self.traffic])
+                cars_locations.append([car.back for car in self.traffic])
             time += 1
         return cars_speeds, cars_locations
 
