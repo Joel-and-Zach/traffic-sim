@@ -50,8 +50,26 @@ class Simulation:
         if (car.back + 24) % self.road >= next_car.back:
             car.set_speed(next_car.speed)
 
+
+    def change_slow_chance(self, car):
+        if car.back < 1000:
+            return 1
+        elif car.back < 2000:
+            return 1.4
+        elif car.back < 3000:
+            return 1
+        elif car.back < 4000:
+            return 2
+        elif car.back < 5000:
+            return 1
+        elif car.back < 6000:
+            return 1.2
+        else:
+            return 1
+
     def speed_or_slow(self, car):
-        if random.random() > car.slow_chance:
+        modifier = self.change_slow_chance(car)
+        if random.random() > car.slow_chance * modifier:
             car.speed_up()
             if car.speed > car.max_speed:
                 car.set_speed(car.max_speed)
