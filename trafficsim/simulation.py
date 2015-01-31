@@ -55,7 +55,6 @@ class Simulation:
         if (car.back + 24) % self.road >= next_car.back:
             car.set_speed(next_car.speed)
 
-
     def change_slow_chance(self, car):
         if car.back < 1000:
             return 1
@@ -121,7 +120,6 @@ class Simulation:
     def hit(self, car, next_car):
         return (car.back + car.speed >= next_car.back and
                 next_car.back - car.back > 0)
-
 
     def create_nightmare(self, number_of_cars):
         cars = []
