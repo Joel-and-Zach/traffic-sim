@@ -6,11 +6,13 @@ import numpy as np
 
 
 class Simulation:
+
     """
     Responsibilites:
     Increments time by seconds
     Moves cars, and decides
     """
+
     def __init__(self, number_of_cars=30, length=1000, nightmare=False):
         if nightmare is False:
             self.traffic = self.create_cars(number_of_cars)
@@ -18,18 +20,28 @@ class Simulation:
             self.traffic = self.create_nightmare(number_of_cars)
         self.road = length
 
-    def simulate(self, desired_time=300):
+    def simulate_for_speeds(self, desired_time=300):
         time = 0
         cars_speeds = []
-        cars_locations = []
         while desired_time > time:
             self.adjust_speeds()
             self.move_cars()
             if time > 59:
                 cars_speeds.extend([car.speed for car in self.traffic])
-                cars_locations.append([car.back for car in self.traffic])
             time += 1
-        return cars_speeds, cars_locations
+        return cars_speeds
+
+
+    def simulate_for_positions(self, desired_time=300):
+        time = 0
+        cars_positions = []
+        while desired_time > time:
+            self.adjust_speeds()
+            self.move_cars()
+            if time > 59:
+                cars_positions.append([car.back for car in self.traffic])
+            time += 1
+        return cars_positions
 
     def speed_logic(self, car, next_car):
         if car.back >= self.road - 24:
@@ -53,8 +65,10 @@ class Simulation:
 
     def end_of_line(self, car, next_car):
         if (car.back + 24) % self.road >= next_car.back:
-            car.set_speed(next_car.speed)
-
+            if car.speed > next_car.speed:
+                car.set_speed(next_car.speed)
+            else:
+                self.speed_or_slow(car)
 
     def change_slow_chance(self, car):
         if car.back < 1000:
@@ -121,7 +135,6 @@ class Simulation:
     def hit(self, car, next_car):
         return (car.back + car.speed >= next_car.back and
                 next_car.back - car.back > 0)
-
 
     def create_nightmare(self, number_of_cars):
         cars = []

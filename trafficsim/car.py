@@ -1,11 +1,11 @@
 import random
 
 styles = ["Scion Xa",
-         "Honda Civic",
-         "Acura TLX",
-         "Toyota Prius",
-         "Honda Accord",
-         "Toyota Camry"]
+          "Honda Civic",
+          "Acura TLX",
+          "Toyota Prius",
+          "Honda Accord",
+          "Toyota Camry"]
 
 
 class Car:
@@ -19,7 +19,6 @@ class Car:
         self.back = position
         self.style = random.choice(styles)
         self.slow_chance = 0.1
-
 
     def __str__(self):
         return self.style
@@ -51,7 +50,9 @@ class Car:
     def set_slow_chance(self, chance):
         self.slow_chance = chance
 
+
 class Aggressive(Car):
+
     def __init__(self, position):
         self.max_speed = 38.89
         self.acceleration = 5
@@ -62,7 +63,9 @@ class Aggressive(Car):
         self.speed = 0
         self.size = 5
 
+
 class Commercial(Car):
+
     def __init__(self, position):
         self.max_speed = 27.78
         self.acceleration = 1.5
