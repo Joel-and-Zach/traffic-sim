@@ -1,14 +1,12 @@
 import random
 
-styles = ["Scion Xa",
-          "Honda Civic",
-          "Acura TLX",
-          "Toyota Prius",
-          "Honda Accord",
-          "Toyota Camry"]
-
 
 class Car:
+    """
+    Responsibilites:
+    Can control it's speed, can tell if a car is too close, and can stop
+    at a certain point.
+    """
 
     def __init__(self, position):
         self.max_speed = 33.33
@@ -17,7 +15,7 @@ class Car:
         self.acceleration = 2
         self.space = 20
         self.back = position
-        self.style = random.choice(styles)
+        self.style = "Generic sedan"
         self.slow_chance = 0.1
 
     def __str__(self):
