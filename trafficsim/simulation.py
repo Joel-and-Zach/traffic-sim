@@ -105,7 +105,8 @@ class Simulation:
                 car.slow_down()
 
     def over_road(self, car, next_car):
-
+        """Allows the given car to restart the loop of the total road while
+        carrying over the distance left to travel."""
         if (car.back + car.speed) % self.road >= next_car.back:
             distance = (next_car.back - (car.size + 1))
             if distance < 0:
