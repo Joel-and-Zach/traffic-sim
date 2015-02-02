@@ -1,6 +1,11 @@
 Traffic Simulation by Joel Thompson and Zachary Huntington-Meath
 At the Iron Yard January 2015.
 
+We originally made a Repo by cloning it to our organization without realzing
+that it was possible for us to fork it to our organization. If you'd like to
+see our work progress you can see it at.
+https://github.com/Joel-and-Zach/traffic-sim
+
 
 Assumptions used in the simulation:
 We created a program to simulate traffic. We made some assumptions that were
